@@ -1,0 +1,13 @@
+
+1.为什么需要gc。
+2.gc算法有哪些。
+3.如何标记存活对象。
+4.hotspot提供的gc收集器都有哪些。
+5.对象存活时间及gc发生时机。
+6.线上参数建议。
+7.gc日志简单分析。
+
+4  开启cms -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
+cms在以下三种情况下会发生fullgc 1 老年代没有足够的空间容纳晋升的对象， 2， 碎片化严重 3 　PermGen 用尽  
+可以用过　-XX:CMSInitiatingOccupancyFraction=N 来调节后台cms运行的时机，默认是70%（当老年代使用率到达70%时启动后台cms进行gc）
+java8 cms默认会手机metaspace中不再载入的类。
