@@ -9,5 +9,5 @@
 
 4  开启cms -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
 cms在以下三种情况下会发生fullgc 1 老年代没有足够的空间容纳晋升的对象， 2， 碎片化严重 3 　PermGen 用尽  
-可以用过　-XX:CMSInitiatingOccupancyFraction=N 来调节后台cms运行的时机，默认是70%（当老年代使用率到达70%时启动后台cms进行gc）
-java8 cms默认会手机metaspace中不再载入的类。
+可以用过　-XX:CMSInitiatingOccupancyFraction=N -XX:+UseCMSInitiatingOccupancyOnly 来调节后台cms运行的时机
+java8 cms默认会收集metaspace中不再使用的类。
