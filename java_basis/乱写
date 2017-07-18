@@ -13,3 +13,4 @@ cms在以下三种情况下会发生fullgc 1 老年代没有足够的空间容�
 java8 cms默认会收集metaspace中不再使用的类。
 
 g1 参考 http://hllvm.group.iteye.com/group/topic/44381#post-272188
+cms 参考 http://hllvm.group.iteye.com/group/topic/44529
