@@ -14,3 +14,5 @@ java8 cms默认会收集metaspace中不再使用的类。
 
 g1 参考 http://hllvm.group.iteye.com/group/topic/44381#post-272188
 cms 参考 http://hllvm.group.iteye.com/group/topic/44529
+
+R大对深入理解jvm的纠错  https://book.douban.com/people/RednaxelaFX/annotation/24722612/
