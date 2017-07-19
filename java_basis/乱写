@@ -18,3 +18,11 @@ cms 参考 http://hllvm.group.iteye.com/group/topic/44529
 R大对深入理解jvm的纠错  https://book.douban.com/people/RednaxelaFX/annotation/24722612/
 
 safepoint https://www.zhihu.com/question/29268019/answer/43762165
+
+g1：
+yonggc ： 回收整个yong regin 
+
+mixedgc： 回收整个yong regin 和部分 old regin  ，初始标记在ygc时完成。
+
+fullgc ： serialold
+
