@@ -11,3 +11,13 @@ server 编译器等待编译的时候是否还能做更有价值的事:server �
 为什么 JVM 不能在启动时用 client 编 译器，然后随着代码变热使用 server 编译器?这种技术被称为分层编译。
 代码先由 client 编译器编译，随着代码变热，由 server 编译器重新编译。Java 8 中，分层编译默认为开启。
 
+
+调优代码缓存
+JVM 编译代码时，会在代码缓存中保留编译之后的汇编语言指令集。代码缓存的大小固 定，所以一旦填满，JVM 就不能编译更多代码了。
+很显然，如果代码缓存过小，就可能会有问题。一些热点被编译了，而其他则没有，最终 导致应用的大部分代码都是解释运行(非常慢)。
+代码缓存填满时，JVM(通常)会发出以下警告:
+     Java HotSpot(TM) 64-Bit Server VM warning: CodeCache is full.
+              Compiler has been disabled.
+     Java HotSpot(TM) 64-Bit Server VM warning: Try increasing the
+              code cache size using -XX:ReservedCodeCacheSize=
+
