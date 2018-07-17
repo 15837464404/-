@@ -1,0 +1,2 @@
+如何获取进程中所有标志的值:   jinfo -flags process_id
+获得对应用生效的 JVM 调优标志:  jcmd process_id VM.flags [-all]
