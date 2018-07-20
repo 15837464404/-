@@ -80,6 +80,11 @@ UseGCLogfileRotation 标志是关闭的。开启 UseGCLogfileRotation 标志后�
  即将 UseCMSInitiatingOccupancyOnly 标志的值设置为真。
 CMSInitiatingOccupancyFraction 参数值的调整可能需要多次迭代才能确定。如果开启了 UseCMSInitiatingOccupancyOnly 标志，
 CMSInitiatingOccupancyFraction 的默认值就被置 为 70，即 CMS 会在老年代空间占用达到 70% 时启动并发收集周期。
+
+
+TLAB 
+
+尽量减少分配巨型对象。
    
   
   
