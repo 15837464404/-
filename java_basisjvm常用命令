@@ -23,3 +23,5 @@ JVM 编译代码时，会在代码缓存中保留编译之后的汇编语言指�
      Java HotSpot(TM) 64-Bit Server VM warning: Try increasing the
               code cache size using -XX:ReservedCodeCacheSize=
 
+
+oom的可能性 ： 
