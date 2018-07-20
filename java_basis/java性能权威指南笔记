@@ -25,3 +25,12 @@ JVM 编译代码时，会在代码缓存中保留编译之后的汇编语言指�
 
 
 oom的可能性 ： 
+1. 原生内存不足
+2. 永久代或元空间内存不足
+3. 堆内存不足
+4. 达到GC的开销限制
+OutOfMemoryError 是不可预料的，我们很难确定应该何时获得堆转储。有几个 JVM 标志 可以起到帮助。
+-XX:+HeapDumpOnOutOfMemoryError
+该标志默认为 false，打开该标志，JVM 会在抛出 OutOfMemoryError 时创建堆转储。
+-XX:HeapDumpPath=<path>
+该标志指定了堆转储将被写入的位置;默认会在应用的当前工作目录下生成 java_ pid<pid>.hprof 文件。这里的路径可以指定目录(这种情况下会使用默认的文件 名)，也可以指定要生成的实际文件的名字。
