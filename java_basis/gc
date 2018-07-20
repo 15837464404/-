@@ -71,6 +71,15 @@ UseGCLogfileRotation 标志是关闭的。开启 UseGCLogfileRotation 标志后�
 默认的日志文件大小是 0(同样也是不作任何限制)。因此，为了让日志循环功 能真正生效，我们必须为所有这些标志设定值。需要注意的是，
 如果设定的数值不足 8 KB 的话，日志文件的大小会以 8 KB 为单位规整。
    
+ cms参数设置 ：
+ 为了让 CMS 收集器赢得这场比赛，方法之一是更早地启动并发收集周期。显然地，CMS 收集器在老年代空间占用达到 60% 时启动并发周期，
+ 这和老年代空间占用到 70% 时才启 动相比，前者完成垃圾收集的几率更大。为了实现这种配置，最简单的方法是同时设置 下 面 这 两 个 标 志:
+ -XX:CMSInitiatingOccupancyFraction=N 和 -XX:+UseCMSInitiatingOcc upancyOnly。 同时使用这两个参数能帮助 CMS 更容易地进行决策:
+ 如果同时设置这两个 标志，那么 CMS 就只依据设置的老年代空间占用率来决定何时启动后台线程。默认情况 下，UseCMSInitiatingOccupancyOnly 标志的值为假，
+ CMS 会使用更复杂的算法判断什么 时候启动并行收集线程。如果有必要提前启动后台线程，推荐使用最简单的方法，
+ 即将 UseCMSInitiatingOccupancyOnly 标志的值设置为真。
+CMSInitiatingOccupancyFraction 参数值的调整可能需要多次迭代才能确定。如果开启了 UseCMSInitiatingOccupancyOnly 标志，
+CMSInitiatingOccupancyFraction 的默认值就被置 为 70，即 CMS 会在老年代空间占用达到 70% 时启动并发收集周期。
    
   
   
