@@ -1,6 +1,7 @@
 如何获取进程中所有标志的值:   jinfo -flags process_id
 获得对应用生效的 JVM 调优标志:  jcmd process_id VM.flags [-all]
 对象内存分布：  jcmd pid GC.class_histogram
+导出堆文件： jcmd process_id GC.heap_dump /path/to/heap_dump.hprof
 
 选择编译器类型： 
 client类型： 通常称c1编译器。
