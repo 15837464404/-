@@ -1,0 +1,10 @@
+OOP-Klass 二分模型 
+oop： ordinary object pointer，或oops，即普通对象指针。用来描述对象实例信息。
+klass：java类的c＋＋对等体，用来描述java类。
+对于oops来说，主要职能在于表示对象的实例数据，没必要持有任何虚函数，而在描述java类的klass对象中含有VTBL(继承自klass父类的klass_vtbl)，那么
+klass就能够java对象的实际类型进行c＋＋的分发，这样一来，oops对象只需要通过相应的klass便可以找到所有的虚函数。这就避免了在每个对象中都分配一个
+c＋＋VTBL指针。
+klass向jvm提供两个功能：
+实现语言层面的java类。
+实现java对象的分发功能。
+上述两个功能在一个c＋＋类中皆能实现，前者在基类klass中已经实现，而后者是由klass子类提供的虚函数实现。
