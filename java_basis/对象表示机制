@@ -8,3 +8,9 @@ klass向jvm提供两个功能：
 实现语言层面的java类。
 实现java对象的分发功能。
 上述两个功能在一个c＋＋类中皆能实现，前者在基类klass中已经实现，而后者是由klass子类提供的虚函数实现。
+在虚拟机内部，通过instanceOopDesc来表示一个java对象，对象在内存中的布局可以分为连续两个部分：instanceOopDesc 和 实例数据。
+其中instanceOopDesc 或 arrayOopDesc 又被称为对象头，instanceOopDesc 对象头包括以下两部分信息：
+Mark Word:   instanceOopDesc 中的_mark成员，存储对象运行时的记录信息，如哈希码，gc分代年龄，锁标志状态，线程持有的锁，偏向锁id，
+偏向时间戳等，_mark成员的数据类型为markOop，占用内存大小与虚拟机位长一致。
+元数据指针：  指向描述类型的klass对象的指针，klass对象包含了实例对象所属类型的元数据，因此该字段称为元数据指针，虚拟机在运行时将频繁的
+使用这个指针定位到位于方法区的类型信息。
