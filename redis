@@ -1,2 +1,53 @@
+线程模型：
+  redis 使用 epoll 作为io多路复用技术实现。自身把epoll的读写，连接，关闭都转换为事件处理。
+
+建议使用scan 遍历key 。 scan cursor [match pattern] [count number]
+
 数据结构：
-     
+
+object encoding key  获取key的编码类型
+内部数据编码
+string :  raw int  embstr
+    int : 8个字节的长整形。
+    embstr ： 小于等于39个字节的字符串。
+    raw ： 大于39个字节的字符串。
+
+hash ： hashtable ziplist
+    根据 hash-max-ziplist-entries  和  hash-max-ziplist-value 配置决定数据结构，都为true 使用ziplist
+list ：linkedlist ziplist
+    根据 list-max-ziplist-entries  和  list-max-ziplist-value 配置决定数据结构，都为true 使用ziplist
+set ： hashtable intset
+     集合元素都是整数 且小于 set-max- intset-entries 时 使用 intset
+zset ： skiplist ziplist
+        zadd key score member [score member ...]
+        根据 zset-max-ziplist- entries  和  zset-max-ziplist-value 配置决定数据结构，都为true 使用ziplist
+
+
+还额外提供 Pipeline  Bitmaps HyperLogLog  事物与lua 脚本， 发布订阅，geo 等功能 。
+
+
+
+持久化
+rdb  和 aof
+
+rdb的优缺点：
+    rdb是一个紧凑的二进制文件，代表redis在某个时间点上的数据快照，非常适用于备份，全量复制等场景。
+    redis 加载rdb文件恢复速度远大于aof 。
+    缺点：
+    rdb 不适合秒级保存， 因为要fork子进程，开销太大。
+    老版本存在兼容问题。
+
+ aof
+   开启命令 ： appendonly yes
+   流程：
+      1 所有写入命令会追加到aof_buf区
+      2 aof缓冲区根据对应的策略向磁盘做同步操作。
+      3 随着aof文件越来越大，需要定期对aof文件进行重写，达到压缩的目的。
+      4 当redis服务重启后，可以加载aof文件来恢复数据。
+
+    aof重写的过程是把redis进程内的数据转化为写命令同步到新aof文件的过程。
+    手动触发 ：  bgrewriteaof
+    自动触发： 根据 auto-aof-rewrite-min-size 和 auto-aof-rewrite-percentage 决定。
+
+
+
