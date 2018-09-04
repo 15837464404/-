@@ -231,7 +231,7 @@ v不能为null，为null时直接 throw exception ，然后看下putVal(k,v,only
      */
     private final void transfer(Node<K,V>[] tab, Node<K,V>[] nextTab) {
         int n = tab.length, stride;
-        //最多允许cpu核数个线程做并行扩容，计算每个线程应该处理old table的元素个数。
+        //最多允许8*cpu核数个线程做并行扩容，计算每个线程应该处理old table的元素个数。
         if ((stride = (NCPU > 1) ? (n >>> 3) / NCPU : n) < MIN_TRANSFER_STRIDE)
             stride = MIN_TRANSFER_STRIDE; // subdivide range
         if (nextTab == null) {            // initiating
